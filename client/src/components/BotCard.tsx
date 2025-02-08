@@ -9,19 +9,19 @@ interface Props {
   onClick: () => void;
 }
 
-const BOT_COLORS = {
-  yellow_bot: "#FFD700",
-  white_bot: "#FFFFFF",
-  green_bot: "#4CAF50",
-  red_bot: "#FF0000",
-  blue_bot: "#2196F3",
-  orange_bot: "#FF9800"
+const BOT_IMAGES = {
+  yellow_bot: "/images/yellow-bot.png",
+  white_bot: "/images/white-bot.png",
+  green_bot: "/images/green-bot.png",
+  red_bot: "/images/red-bot.png",
+  blue_bot: "/images/blue-bot.png",
+  orange_bot: "/images/orange-bot.png"
 };
 
 export function BotCard({ bot, isSelected, timeRange, onClick }: Props) {
   const performance = bot[timeRange];
-  const color = BOT_COLORS[bot.name as keyof typeof BOT_COLORS];
-  
+  const imagePath = BOT_IMAGES[bot.name as keyof typeof BOT_IMAGES];
+
   return (
     <button
       onClick={onClick}
@@ -31,13 +31,13 @@ export function BotCard({ bot, isSelected, timeRange, onClick }: Props) {
       )}
     >
       <div className="flex flex-col items-center gap-2">
-        <div
-          className="w-8 h-8"
-          style={{
-            backgroundColor: color,
-            clipPath: "polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%)"
-          }}
-        />
+        <div className="w-12 h-12 relative">
+          <img 
+            src={imagePath} 
+            alt={`${bot.name} icon`}
+            className="w-full h-full object-contain"
+          />
+        </div>
         <span className={cn(
           "text-sm font-medium",
           performance >= 0 ? "text-green-500" : "text-red-500"
